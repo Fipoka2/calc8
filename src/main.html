@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Восьмеричный калькулятор</title>
+    <script src="../node_modules/vue/dist/vue.min.js"></script>
+    <link rel="stylesheet"
+          href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+        .pad-top {
+            padding-top: 5px;
+        }
+        .container {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 10%;
+            width: 20%;
+        }
+    </style>
+</head>
+<body>
+<div id="app" class="container">
+    <p>Выражение: {{previousValues.reduce(
+        (sum, cur) => {
+            return sum != '' ? sum + ' + ' + cur : cur;
+            }
+        , '')}}</p>
+    <p>Результат в восьмеричной сс: {{sum}}</p>
+    <div class="input-group">
+        <input type="number" class="form-control" v-model="message">
+    </div>
+    <div class="row pad-top">
+        <div class="col-8">
+            <button class="btn btn-outline-primary" v-on:click="clear()">Очистить</button>
+        </div>
+    </div>
+    <div class="row justify-content-center pad-top">
+        <button-x v-for="n of [1, 2, 3]"
+                  v-on:insert-number="addNumber(n)"
+                  :x="n"></button-x>
+    </div>
+    <div class="row justify-content-center pad-top">
+        <button-x v-for="n of [4, 5, 6]"
+                  v-on:insert-number="addNumber(n)"
+                  :x="n"></button-x>
+    </div>
+    <div class="row justify-content-center pad-top">
+        <button-x v-for="n of [7, 8, 9]"
+                  v-on:insert-number="addNumber(n)"
+                  :x="n"></button-x>
+    </div>
+    <div class="row justify-content-center pad-top">
+        <div class="col-4">
+            <button class="btn btn-outline-primary" v-on:click="add()">+</button>
+        </div>
+        <button-x :x="0"
+                  v-on:insert-number="addNumber(0)"
+        ></button-x>
+        <div class="col-4">
+            <button class="btn btn-outline-primary" v-on:click="calculate()">=</button>
+        </div>
+    </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
