@@ -20,7 +20,8 @@ const app = new Vue({
     methods: {
         validate: function (event) {
             const regExp = new RegExp("^([0-7]|\-)+$");
-            this.invalid = !this.message.match(regExp) || isNaN(parseInt(this.message));
+            this.invalid =
+                (!this.message.match(regExp) || isNaN(parseInt(this.message))) && this.message != '';
         },
         decode: function (number) {
             parseInt(number).toString(8);
